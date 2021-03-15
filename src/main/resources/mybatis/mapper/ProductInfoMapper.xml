@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.godwin.mapper.ProductInfoMapper">
+
+    <select id="findByProductStatus" parameterType="java.lang.Integer" resultType="ProductInfo">
+        select * from product_info where product_status =#{productStatus};
+    </select>
+
+    <select id="findByProductId"  parameterType="String" resultType="ProductInfo">
+        select * from product_info where product_id =#{productId};
+    </select>
+
+
+    <select id="findAll"  resultType="ProductInfo">
+        select * from product_info;
+    </select>
+
+    <insert id="add" parameterType="ProductInfo">
+        insert into
+        product_info(product_id,product_name,product_price,product_stock,product_description,product_icon,product_status,category_type,create_time,update_time)
+        values(#{productId},#{productName},#{productPrice},#{productStock},#{productDescription},#{productIcon},#{productStatus},#{categoryType},now(),now());
+    </insert>
+    
+    <update id="update" parameterType="ProductInfo">
+        update product_info
+        set product_stock=#{productStock}
+        where product_id=#{productId};
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.godwin.mapper.ProductCategoryMapper">
+
+    <insert id="add" parameterType="ProductCategory">
+        insert into product_category(category_id,category_name,category_type,create_time,update_time)
+        values(#{categoryId},#{categoryName},#{categoryType},now(),now());
+    </insert>
+
+    <select id="findByCategoryId"  parameterType="java.lang.Integer" resultType="ProductCategory">
+        select * from product_category where category_id =#{categoryId};
+    </select>
+
+    <select id="findAll"  resultType="ProductCategory">
+        select * from product_category;
+    </select>
+
+    <select id="findByCategoryType" parameterType="java.lang.Integer" resultType="ProductCategory">
+        select * from product_category where category_type in
+        <foreach collection="list" item="categoryTypeList" index="index" open="(" close=")" separator=",">
+            #{categoryTypeList}
+        </foreach>
+    </select>
+
+</mapper>
